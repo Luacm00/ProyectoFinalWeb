@@ -1,0 +1,8 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar el archivo de configuración del entorno
+.env
+
+# Ignorar configuraciones locales de IDEs o editores
+.vscode/
