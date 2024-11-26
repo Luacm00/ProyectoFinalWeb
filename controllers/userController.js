@@ -1,7 +1,6 @@
-// controllers/userController.js
 const jwt = require("jsonwebtoken");
-const User = require('../models/userModelo');
-const SECRET_KEY = "tu_clave_secreta"; 
+const User = require("../models/userModelo");
+const SECRET_KEY = "tu_clave_secreta";
 
 // Registro de usuario
 exports.register = async (req, res) => {
@@ -46,6 +45,44 @@ exports.getProfile = async (req, res) => {
     if (!userProfile)
       return res.status(404).json({ error: "Perfil no encontrado" });
     res.json(userProfile);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Agregar equipo a favoritos
+exports.addFavoriteTeam = async (req, res) => {
+  const { userId } = req.body; //Se debe pasar el userId
+  const { teamId } = req.body;
+
+  try {
+    const result = await User.addFavoriteTeam(userId, teamId);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+//Obtener equipos favoritos de usuario
+exports.getFavoriteTeams = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const favorites = await User.getFavoriteTeam(userId);
+    res.json(favorites);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+//Eliminar equipo de favoritos
+exports.removeFavoriteTeam = async (req, res) => {
+  const { userId } = req.body;
+  const { teamId } = req.body;
+
+  try {
+    const result = await User.removeFavoriteTeam(userId, teamId);
+    res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

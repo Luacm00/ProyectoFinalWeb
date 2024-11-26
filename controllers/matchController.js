@@ -34,3 +34,13 @@ exports.getMatchResult = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// Obtener resultados de partidos en orden cronológico
+exports.getMatchResults = async (req, res) => {
+  try {
+    const matches = await Match.getAllMatchesWithTeams();
+    res.json(matches);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

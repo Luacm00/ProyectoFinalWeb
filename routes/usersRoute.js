@@ -17,4 +17,13 @@ router.get("/profile", verifyToken, (req, res) => {
   res.json({ message: "Perfil de usuario", userId: req.userId });
 });
 
+//Agregar equipo a favoritos
+router.post("/favorites", userController.addFavoriteTeam);
+
+//Obtener equipos favoritos de un usuario
+router.get("/:userId/favorites", userController.getFavoriteTeams);
+
+//Eliminar equipo de favoritos
+router.delete("/favorites", userController.removeFavoriteTeam);
+
 module.exports = router;
