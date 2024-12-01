@@ -12,7 +12,7 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server); 
 
 io.on("connection", (socket) => {
   console.log("Nuevo cliente conectado:", socket.id);
